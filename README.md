@@ -321,7 +321,7 @@ This project demonstrates real-world DevOps engineering concepts including:
 
 ## Sneha Basuthkar
 
-DevOps Engineer | AWS | Kubernetes | Terraform | GitHub Actions | GitOps | ArgoCD
+Senior Cloud Engineer | AWS | Kubernetes | Terraform | GitHub Actions | GitOps | ArgoCD
 
 GitHub:
 
