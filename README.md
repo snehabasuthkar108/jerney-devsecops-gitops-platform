@@ -30,7 +30,7 @@ This project includes:
 * GitOps Continuous Deployment using ArgoCD
 * DevSecOps security scanning using Trivy, Checkov, and Hadolint
 * GHCR container image management
-* Kubernetes networking and storage
+* Kubernetes networking, storage, and security policies
 
 ---
 
@@ -55,6 +55,7 @@ This project includes:
 
 # CI/CD + GitOps Workflow
 
+```text
 Developer Push
       │
       ▼
@@ -80,7 +81,9 @@ GitHub Actions CI Pipeline
                     │
                     ▼
             Kubernetes Rolling Update
+```
 
+---
 
 # DevSecOps Security Implementation
 
@@ -119,14 +122,50 @@ The application is deployed on AWS EKS using Kubernetes manifests.
 
 ## Kubernetes Resources Used
 
+* Namespace
 * Deployments
-* Services
-* Persistent Volume Claims
-* ConfigMaps
+* Services (ClusterIP & NodePort)
+* Persistent Volume Claims (PVC)
+* StorageClass (AWS EBS CSI)
 * Secrets
 * Network Policies
+* Init Containers
 * Readiness Probes
 * Liveness Probes
+
+---
+
+# Kubernetes Security Features Implemented
+
+* Non-root containers
+* Dropped Linux capabilities
+* Restricted container privilege escalation
+* Internal service communication using ClusterIP
+* Network segmentation using Kubernetes NetworkPolicies
+* Secret-based database credential management
+
+---
+
+# Kubernetes Networking Architecture
+
+The Kubernetes deployment was designed using internal service communication patterns.
+
+## Internal Communication Flow
+
+```text
+Frontend Pod
+    ↓
+Backend Service (ClusterIP)
+    ↓
+PostgreSQL Service (ClusterIP)
+```
+
+## Network Security Controls
+
+* Database traffic restricted to backend pods only
+* Backend traffic restricted to frontend pods only
+* Internal services isolated using Kubernetes NetworkPolicies
+* Database service not externally exposed
 
 ---
 
@@ -155,17 +194,17 @@ Docker images are stored in GitHub Container Registry (GHCR).
 
 ```text
 Backend:
-ghcr.io/<github-username>/jerney-devops-project/jerney-backend
+ghcr.io/snehabasuthkar108/jerney-devops-project/jerney-backend
 
 Frontend:
-ghcr.io/<github-username>/jerney-devops-project/jerney-frontend
+ghcr.io/snehabasuthkar108/jerney-devops-project/jerney-frontend
 ```
 
 ---
 
 # Project Structure
 
-
+```text
 jerney-devops-project/
 │
 ├── .github/workflows/      # GitHub Actions CI pipeline
@@ -173,49 +212,61 @@ jerney-devops-project/
 ├── frontend/               # React frontend application
 ├── terraform/              # Terraform infrastructure code
 ├── k8s/                    # Kubernetes manifests
-├── assets/                 # Architecture diagrams
 ├── screenshots/            # Project screenshots
 ├── docker-compose.yml
 ├── README.md
 └── .gitignore
 ```
 
+---
+
 # Deployment Validation
 
 The application deployment was validated successfully on AWS EKS.
 
-Since this project was built in a cost-optimized lab environment, application access was verified using Kubernetes port-forwarding.
+Since this project was implemented in a cost-optimized lab environment, the frontend application was exposed internally using a Kubernetes NodePort service and validated locally using Kubernetes port-forwarding.
 
+## Access Method Used
+
+```bash
 kubectl port-forward svc/jerney-frontend 8172:80 -n jerney
+```
 
 Application accessed locally via:
 
+```text
 http://127.0.0.1:8172
+```
+
+This approach was used instead of configuring an external LoadBalancer or Ingress controller to optimize AWS resource usage during testing and validation.
+
+---
 
 # Useful Kubernetes Commands
 
 ## Check Pods
 
-
+```bash
 kubectl get pods -A
-
+```
 
 ## Check Services
 
-
+```bash
 kubectl get svc -A
-
+```
 
 ## Check Nodes
 
-
+```bash
 kubectl get nodes
-
+```
 
 ## Check Deployments
 
-
+```bash
 kubectl get deployments -A
+```
 
 ---
 
@@ -227,7 +278,7 @@ kubectl get deployments -A
 * AWS EKS deployment automation
 * Docker image lifecycle management
 * DevSecOps vulnerability scanning
-* Kubernetes networking and storage
+* Kubernetes networking, storage, and security policies
 * Automated image updates in manifests
 * Rolling deployments on Kubernetes
 * Production-style DevOps workflow
@@ -262,7 +313,7 @@ This project demonstrates real-world DevOps engineering concepts including:
 * AWS cloud deployment
 * Production-style deployment workflows
 * Automated security validation
-* Kubernetes deployment troubleshooting
+* Kubernetes deployment troubleshooting and debugging
 
 ---
 
@@ -276,6 +327,8 @@ GitHub:
 
 https://github.com/snehabasuthkar108
 
-If You Like This Project
+---
+
+# If You Like This Project
 
 Give this repository a ⭐ on GitHub.
