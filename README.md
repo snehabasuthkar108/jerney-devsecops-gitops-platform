@@ -24,7 +24,7 @@ This project includes:
 * PostgreSQL database
 * Docker containerization
 * Kubernetes orchestration
-* AWS EKS deployment
+* AWS EKS deployment using EKS Auto Mode
 * Terraform Infrastructure as Code
 * GitHub Actions CI pipeline
 * GitOps Continuous Deployment using ArgoCD
@@ -186,6 +186,20 @@ Infrastructure provisioning is fully automated using Terraform.
 
 ---
 
+EKS Auto Mode
+
+This project was deployed using AWS EKS Auto Mode to simplify Kubernetes infrastructure management and reduce operational overhead.
+
+EKS Auto Mode was used for:
+
+Automated worker node provisioning
+Cluster compute management
+Simplified Kubernetes scaling operations
+Reduced manual node administration
+Dynamic infrastructure lifecycle handling
+
+This helped streamline cluster operations while focusing primarily on Kubernetes workloads, GitOps deployment, and DevSecOps implementation.
+
 # Container Registry
 
 Docker images are stored in GitHub Container Registry (GHCR).
@@ -276,6 +290,7 @@ kubectl get deployments -A
 * GitOps Continuous Deployment using ArgoCD
 * Infrastructure provisioning using Terraform
 * AWS EKS deployment automation
+* AWS EKS Auto Mode cluster deployment
 * Docker image lifecycle management
 * DevSecOps vulnerability scanning
 * Kubernetes networking, storage, and security policies
@@ -308,6 +323,7 @@ This project demonstrates real-world DevOps engineering concepts including:
 * CI/CD automation
 * GitOps deployment strategy
 * Kubernetes orchestration
+* Modern Kubernetes operations using AWS EKS Auto Mode
 * DevSecOps implementation
 * Container lifecycle management
 * AWS cloud deployment
